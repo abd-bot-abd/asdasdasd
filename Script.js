@@ -30,9 +30,9 @@ document.body.innerHTML += `
   <div class="text"><img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/0.svg">Default</div>
   <div class="menu transition hidden" tabindex="-1">
   <div data-value="0" class="item active selected">
-        <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/0.svg">Default</div><div data-value="1" class="item">
-        <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/1.svg">Man 1</div><div data-value="2" class="item">
-        <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/2.svg">Man 2</div><div data-value="3" class="item">
+        <img class="ui avatar image" src="https://cdn.discordapp.com/avatars/1015999052413939762/2f5064debc9056f7097fa2798de23b25.webp?size=80">Default</div><div data-value="1" class="item">
+        <img class="ui avatar image" src="https://cdn.discordapp.com/avatars/1094250928145694760/bff24b2da3326c98f1f45bc9b1bb3977.webp?size=80">Man 1</div><div data-value="2" class="item">
+        <img class="ui avatar image" src="https://cdn.discordapp.com/avatars/994187824876236891/0ad8d6b7dffa31fb1fb19a6e8ca7b2d4.webp?size=80">Man 2</div><div data-value="3" class="item">
         <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/3.svg">Man 3</div><div data-value="4" class="item">
         <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/4.svg">Man 4</div><div data-value="5" class="item">
         <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/5.svg">Man 5</div><div data-value="6" class="item">
@@ -193,7 +193,7 @@ Eleveda👋 - Goodbye👋</div>
 </div><div class="field">
 <label>Speed (ms):</label><div class="ui labeled input"><input type="number" value="${params.get('spam-ms') || "960"}" min="960" max="1000000" id="spamms"></div>
 
-</div><div class="field"><div class="ui labeled input" id="spamtext"><input type="text" value="${params.get('spam-text') || "anonimbiri"}" placeholder="Spam text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field"><button class="ui primary compact labeled icon button" id="startspam"><i class="play icon"></i> Start Spam</button></div></div>
+</div><div class="field"><div class="ui labeled input" id="spamtext"><input type="text" value="${params.get('spam-text') || "ABED_MUTER"}" placeholder="Spam text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field"><button class="ui primary compact labeled icon button" id="startspam"><i class="play icon"></i> Start Spam</button></div></div>
 
 <div class="inline fields"><label>Messaging:</label><div class="field"><div class="ui selection messaging dropdown">
   <input type="hidden" name="gender">
@@ -205,7 +205,7 @@ Eleveda👋 - Goodbye👋</div>
   </div></div>
 </div>
 
-<div class="field"><div class="ui labeled input" id="messagetext"><input type="text" value="${params.get('message-text') || "anonimbiri"}" placeholder="Message text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field">
+<div class="field"><div class="ui labeled input" id="messagetext"><input type="text" value="${params.get('message-text') || "ABED_MUTER"}" placeholder="Message text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field">
 <button class="ui primary button" id="send">Send Message</button></div>
 </div>
 
@@ -1936,8 +1936,8 @@ document.querySelector("#send").addEventListener("click", function () {
   const regex = /\b[aAá]\.?([lLℓᎥiI]\.?){2}[hH𝔥ʜ]*[\W_]*[aAá]\.?([lLℓᏂhH𝔥ʜ]*[\W_]*){1,2}\b|\b(?:[^\w\s]*[aAá][^\w\s]*){2,}|\b[ᴬaAá][ˡlL1Ii][ᴸlL1Ii]?[ᴬaAá][ℍhH](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*|\b[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼áaAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[lLℓIi][^w\s]*[lLℓIi](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[aAá][^\w\s]*[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼aáAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*\b|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|İsa|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|(?:\W*[\/\*\-+.,:;]\W*)*Y(?:\W*[\/\*\-+.,:;]\W*)*a(?:\W*[\/\*\-+.,:;]\W*)*h(?:\W*[\/\*\-+.,:;]\W*)*v(?:\W*[\/\*\-+.,:;]\W*)*e|(?:\W*[\/\*\-+.,:;]\W*)*İ(?:\W*[\/\*\-+.,:;]\W*)*\b/gi;
 
   if (regex.test(messagetext)) {
-    document.querySelector('#messagetext input').value = "anonimbiri";
-    messagetext = "anonimbiri";
+    document.querySelector('#messagetext input').value = "ABED_MUTER";
+    messagetext = "ABED_MUTER";
   }
 
   let openSockets = socketList.filter(socket => socket.readyState === WebSocket.OPEN && socket.isRoom);
@@ -1970,8 +1970,8 @@ function startSpamIntervalId() {
         const regex = /\b[aAá]\.?([lLℓᎥiI]\.?){2}[hH𝔥ʜ]*[\W_]*[aAá]\.?([lLℓᏂhH𝔥ʜ]*[\W_]*){1,2}\b|\b(?:[^\w\s]*[aAá][^\w\s]*){2,}|\b[ᴬaAá][ˡlL1Ii][ᴸlL1Ii]?[ᴬaAá][ℍhH](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*|\b[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼áaAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[lLℓIi][^w\s]*[lLℓIi](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[aAá][^\w\s]*[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼aáAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*\b|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|İsa|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|(?:\W*[\/\*\-+.,:;]\W*)*Y(?:\W*[\/\*\-+.,:;]\W*)*a(?:\W*[\/\*\-+.,:;]\W*)*h(?:\W*[\/\*\-+.,:;]\W*)*v(?:\W*[\/\*\-+.,:;]\W*)*e|(?:\W*[\/\*\-+.,:;]\W*)*İ(?:\W*[\/\*\-+.,:;]\W*)*\b/gi;
 
         if (regex.test(spamtext)) {
-          document.querySelector('#spamtext input').value = "anonimbiri";
-          spamtext = "anonimbiri";
+          document.querySelector('#spamtext input').value = "ABED_MUTER";
+          spamtext = "ABED_MUTER";
         }
         const randomIndex = Math.floor(Math.random() * (spamtext.length + 1));
         let modifiedMessage;
