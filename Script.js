@@ -1977,7 +1977,7 @@ function startSpamIntervalId() {
         let modifiedMessage;
 
         if (Math.random() < 0.1) {
-          modifiedMessage = "Bot developer: github.com/anonimbiri";
+          modifiedMessage = "ABED_MUTER";
         } else {
           modifiedMessage = spamtext.slice(0, randomIndex) + '឵' + spamtext.slice(randomIndex);
         }
