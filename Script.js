@@ -1342,7 +1342,7 @@ btn.addEventListener("click", async function () {
 
             if (data[1].nick.startsWith("REDbot") && data[1].avatar === 1) {
               for (const s of socketList) {
-                s.send(`42[11,"${s.playerId}","🤖 I respect this bot and cannot work against it. Goodbye! 👋 "]`);
+                s.send(`42[11,"${s.playerId}","🤖 I respect this bot and cannot work against it. Goodbye! 👋 ABED_MUTER_BOT "]`);
                 s.send(`42[24,${s.playerId}]`);
               }
             } else {
