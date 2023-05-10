@@ -1279,7 +1279,7 @@ btn.addEventListener("click", async function () {
           socket.players = data[5]; // players'i soket nesnesine kaydet
           socket.isRoom = true;
           socket.send(`42[46,${playerId}]`);
-          if (params.get('private-mode') !== "true") { socket.send(`42[11,"${playerId}",""]`); }
+          if (params.get('private-mode') !== "true") { socket.send(`42[11,"${playerId}","ABED_MUTER_BOT"]`); }
           updateUserList(data[5]);
           iziToast.info({
             position: 'topRight',
@@ -1553,7 +1553,7 @@ btn2.addEventListener("click", function () {
   if (socketList) {
     socketList.forEach(function (socket) {
       if (socket.readyState === WebSocket.OPEN) {
-        if (params.get('private-mode') === "true") { socket.send(`42[11,"${socket.playerId}",""]`); }
+        if (params.get('private-mode') === "true") { socket.send(`42[11,"${socket.playerId}","ABED_MUTER_BOT"]`); }
         socket.close();
         socket.onerror = null;
         socket.onclose = null;
