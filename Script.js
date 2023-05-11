@@ -30,9 +30,9 @@ document.body.innerHTML += `
   <div class="text"><img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/0.svg">Default</div>
   <div class="menu transition hidden" tabindex="-1">
   <div data-value="0" class="item active selected">
-        <img class="ui avatar image" src="https://cdn.discordapp.com/avatars/1015999052413939762/2f5064debc9056f7097fa2798de23b25.webp?size=80">Default</div><div data-value="1" class="item">
-        <img class="ui avatar image" src="https://cdn.discordapp.com/avatars/1094250928145694760/bff24b2da3326c98f1f45bc9b1bb3977.webp?size=80">Man 1</div><div data-value="2" class="item">
-        <img class="ui avatar image" src="https://cdn.discordapp.com/avatars/994187824876236891/0ad8d6b7dffa31fb1fb19a6e8ca7b2d4.webp?size=80">Man 2</div><div data-value="3" class="item">
+        <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/0.svg">Default</div><div data-value="1" class="item">
+        <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/1.svg">Man 1</div><div data-value="2" class="item">
+        <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/2.svg">Man 2</div><div data-value="3" class="item">
         <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/3.svg">Man 3</div><div data-value="4" class="item">
         <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/4.svg">Man 4</div><div data-value="5" class="item">
         <img class="ui avatar image" src="https://gartic.io/static/images/avatar/svg/5.svg">Man 5</div><div data-value="6" class="item">
@@ -121,12 +121,16 @@ document.body.innerHTML += `
     <button class="ui inverted red button button" id="clearallproxy" style="display: ${params.get('proxy') ? 'block' : 'none'};">Clear All Proxy</button></div>
     </div>
 
+    <div class="inline fields">
     <div class="field">
     <div class="ui private checkbox">
       <input type="checkbox" tabindex="0" class="hidden">
       <label>Private Mode</label>
-    </div>
-    </div>
+    </div></div>
+    <div class="field">
+    <button class="ui primary button" style="display: ${params.get('private-mode') ? 'block' : 'none'};" id="LoadUsernameList">Load Username List</button></div>
+    <input style="display:none" type="file" id="file-input" accept="application/json">
+    </div></div>
 
     <a href="https://github.com/anonimbiri/gartic.io-bot" target="_blank" class="ui right floated
 inverted button"><i class="github icon"></i>Open Source Code</a>    <div class="inline"><button class="ui primary button" id="addbot">Add Bots</button><button class="ui inverted red button" id="clearall">Clear All</button> <button class="ui right labeled icon button" id="watchtheroom">Watch The Room<i class="external link icon"></i></button>
@@ -181,6 +185,21 @@ Eleveda👋 - Goodbye👋</div>
   </div>
 </div>
 
+<div class="ui tutorial modal">
+  <div class="header">Important</div>
+  <div class="image content">
+    <img src="./tutorial.png" class="image">
+    <div class="description">
+      <p>Your JSON file must be like the one shown in the picture, otherwise you will get an error.</p>
+      <p>You don't have to import. If you don't import, it will fetch from the API.</p>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui approve button">Add</div>
+    <div class="ui cancel button">Cancel</div>
+  </div>
+</div>
+
 <div class="ui inverted segment" id="tool" style="display: none;"><div class="ui inverted form ">
 <div class="inline fields"><label>Reports:</label><div class="field"><button class="ui primary button" id="reportdraw">Report Draw</button></div><div class="field"><button class="ui red button" id="kickall">Kick All Players</button></div></div><div class="inline fields"><label>Spam:</label><div class="field"><div class="ui selection spam dropdown">
   <input type="hidden" name="gender">
@@ -193,7 +212,7 @@ Eleveda👋 - Goodbye👋</div>
 </div><div class="field">
 <label>Speed (ms):</label><div class="ui labeled input"><input type="number" value="${params.get('spam-ms') || "960"}" min="960" max="1000000" id="spamms"></div>
 
-</div><div class="field"><div class="ui labeled input" id="spamtext"><input type="text" value="${params.get('spam-text') || "ABED_MUTER"}" placeholder="Spam text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field"><button class="ui primary compact labeled icon button" id="startspam"><i class="play icon"></i> Start Spam</button></div></div>
+</div><div class="field"><div class="ui labeled input" id="spamtext"><input type="text" value="${params.get('spam-text') || "anonimbiri"}" placeholder="Spam text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field"><button class="ui primary compact labeled icon button" id="startspam"><i class="play icon"></i> Start Spam</button></div></div>
 
 <div class="inline fields"><label>Messaging:</label><div class="field"><div class="ui selection messaging dropdown">
   <input type="hidden" name="gender">
@@ -205,7 +224,7 @@ Eleveda👋 - Goodbye👋</div>
   </div></div>
 </div>
 
-<div class="field"><div class="ui labeled input" id="messagetext"><input type="text" value="${params.get('message-text') || "ABED_MUTER"}" placeholder="Message text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field">
+<div class="field"><div class="ui labeled input" id="messagetext"><input type="text" value="${params.get('message-text') || "anonimbiri"}" placeholder="Message text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field">
 <button class="ui primary button" id="send">Send Message</button></div>
 </div>
 
@@ -419,6 +438,7 @@ let url = document.querySelector('#roomcode input');
 let amount = document.querySelector('#botamount input');
 let serverid = document.querySelector('#serverid input');
 let watchtheroom = document.querySelector('#watchtheroom');
+let fileInput = document.getElementById('file-input');
 
 let reportdraw = document.querySelector('#reportdraw');
 let kickall = document.querySelector('#kickall');
@@ -713,6 +733,38 @@ function rgbToHex(r, g, b) {
   const hexB = Math.round(b / step) * step;
   return `x${hexR.toString(16).padStart(2, '0').toUpperCase()}${hexG.toString(16).padStart(2, '0').toUpperCase()}${hexB.toString(16).padStart(2, '0').toUpperCase()}`;
 }
+
+let people;
+document.querySelector("#LoadUsernameList").addEventListener("click", function () {
+  updateRoomList();
+  $('.ui.tutorial.modal')
+    .modal('setting', 'closable', false)
+    .modal({
+      onApprove: function () {
+        fileInput.click();
+
+        fileInput.addEventListener('change', function () {
+          let file = fileInput.files[0];
+          if (file.type !== 'application/json') {
+            alert('Please select a JSON file.');
+            return;
+          }
+
+          const reader = new FileReader();
+
+          reader.onload = function (event) {
+            var data = JSON.parse(event.target.result);
+            people = data.people;
+            peopleSettings = data.settings;
+          };
+
+          reader.readAsText(file);
+        });
+      }
+    })
+    .modal('show')
+    ;
+});
 
 function createLabels() {
   let targets = [];
@@ -1100,9 +1152,10 @@ function updateRoomList() {
 
 let lastRandomSeconds = null;
 
+let peopleSettings;
 function waitRandomSeconds() {
-  const minSeconds = 1;
-  const maxSeconds = 10;
+  let minSeconds = (people && peopleSettings && peopleSettings && peopleSettings.minSeconds !== undefined) ? peopleSettings.minSeconds : 1;
+  let maxSeconds = (people && peopleSettings && peopleSettings && peopleSettings.maxSeconds !== undefined) ? peopleSettings.maxSeconds : 10;
 
   let randomSeconds = Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds;
 
@@ -1126,6 +1179,7 @@ function waitRandomSeconds() {
 
 let cooldowns = {};
 let messageSent = false;
+let warningMessage = true;
 btn.addEventListener("click", async function () {
   params = new URLSearchParams(window.location.search);
   params.set('name', document.querySelector('#botname div input').value);
@@ -1141,7 +1195,7 @@ btn.addEventListener("click", async function () {
 
   let proxylist = JSON.parse(localStorage.getItem("proxies"));
 
-  var warningMessage = true;
+  warningMessage = true;
 
   const response = await fetch(url.value ? `https://gartic.io/server?check=1&room=${params.get('code')}` : `https://gartic.io/server?check=1&lang=${params.get('lang')}`);
   const data = await response.text();
@@ -1154,35 +1208,58 @@ btn.addEventListener("click", async function () {
     if (params.get('private-mode') === "true") {
       await waitRandomSeconds();
       try {
-        const lang = navigator.language.slice(0, 2); // Kullanıcının tarayıcı ayarlarından dil kodunu al
-        let response = await fetch(`https://randomuser.me/api/?nat=${lang}`); // Rastgele bir kullanıcı seç
-        let data = await response.json();
-
         let username;
         let gender;
-        // Eğer seçilen ülkede "id" alanı boş olan bir kullanıcı varsa, bu kullanıcının "login.username" özelliğini al
-        if (data.results[0].id.value === null) {
-          username = data.results[0].name.first;
-          gender = data.results[0].gender;
-        } else {
-          // Eğer seçilen ülkede "id" alanı boş olan bir kullanıcı yoksa, başka bir ülke seç ve tekrar deneyin
-          let newLang = lang;
-          while (newLang === lang) {
-            // Farklı bir ülke seçmek için döngü kullanabilirsiniz
-            newLang = getRandomLanguage();
+
+        if (people) {
+
+          if (people.length < 1){
+            warningMessage = false;
           }
-          console.log(newLang);
-          response = await fetch(`https://randomuser.me/api/?nat=${newLang}`);
-          data = await response.json();
-          username = data.results[0].name.first;
-          gender = data.results[0].gender;
+
+          username = people[Math.floor(Math.random() * people.length)].name;
+          gender = people[Math.floor(Math.random() * people.length)].gender;
+
+          people = people.filter(function(person) {
+            return person.name !== username;
+          });
+
+          const regex = /\b[aAá]\.?([lLℓᎥiI]\.?){2}[hH𝔥ʜ]*[\W_]*[aAá]\.?([lLℓᏂhH𝔥ʜ]*[\W_]*){1,2}\b|\b(?:[^\w\s]*[aAá][^\w\s]*){2,}|\b[ᴬaAá][ˡlL1Ii][ᴸlL1Ii]?[ᴬaAá][ℍhH](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*|\b[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼áaAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[lLℓIi][^w\s]*[lLℓIi](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[aAá][^\w\s]*[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼aáAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*\b|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|İsa|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|(?:\W*[\/\*\-+.,:;]\W*)*Y(?:\W*[\/\*\-+.,:;]\W*)*a(?:\W*[\/\*\-+.,:;]\W*)*h(?:\W*[\/\*\-+.,:;]\W*)*v(?:\W*[\/\*\-+.,:;]\W*)*e|(?:\W*[\/\*\-+.,:;]\W*)*İ(?:\W*[\/\*\-+.,:;]\W*)*\b/gi;
+
+          if (regex.test(username)) {
+            document.querySelector('#botname div input').value = "anonimbiri";
+            username = "anonimbiri";
+          }
         }
 
-        function getRandomLanguage() {
-          const languages = ["au", "br", "ca", "ch", "de", "dk", "es", "fi", "fr", "gb", "ie", "ir", "no", "nl", "nz", "tr", "us"];
-          return languages[Math.floor(Math.random() * languages.length)]; // Rastgele bir dil kodu seç
-        }
+        if (!username && !gender && !people) {
+          const lang = navigator.language.slice(0, 2); // Kullanıcının tarayıcı ayarlarından dil kodunu al
+          let response = await fetch(`https://randomuser.me/api/?nat=${lang}`); // Rastgele bir kullanıcı seç
+          let data = await response.json();
 
+          // Eğer seçilen ülkede "id" alanı boş olan bir kullanıcı varsa, bu kullanıcının "login.username" özelliğini al
+          if (data.results[0].id.value === null) {
+            username = data.results[0].name.first;
+            gender = data.results[0].gender;
+          } else {
+            // Eğer seçilen ülkede "id" alanı boş olan bir kullanıcı yoksa, başka bir ülke seç ve tekrar deneyin
+            let newLang = lang;
+            while (newLang === lang) {
+              // Farklı bir ülke seçmek için döngü kullanabilirsiniz
+              newLang = getRandomLanguage();
+            }
+            console.log(newLang);
+            response = await fetch(`https://randomuser.me/api/?nat=${newLang}`);
+            data = await response.json();
+            username = data.results[0].name.first;
+            gender = data.results[0].gender;
+          }
+
+          function getRandomLanguage() {
+            const languages = ["au", "br", "ca", "ch", "de", "dk", "es", "fi", "fr", "gb", "ie", "ir", "no", "nl", "nz", "tr", "us"];
+            return languages[Math.floor(Math.random() * languages.length)]; // Rastgele bir dil kodu seç
+          }
+        }
         modifiedName = username;
         if (gender === "male") {
           modifiedProfil = Math.floor(Math.random() * 19);
@@ -1239,6 +1316,10 @@ btn.addEventListener("click", async function () {
       });
     });
 
+    if (!warningMessage) {
+      break;
+    }
+
     socket.addEventListener('message', (event) => {
 
       if (event.data === '40') {
@@ -1248,7 +1329,7 @@ btn.addEventListener("click", async function () {
           socket.send(`42[3,{"v":20000,"nick":"${modifiedName}","avatar":${modifiedProfil},"sala":"${params.get('code').slice(-4)}"}]`);
         }
       } else if (event.data === '42[6,4]') {
-        if (warningMessage === true) {
+        if (warningMessage) {
           warningMessage = false;
           $('.tiny.connection.problem.modal')
             .modal({
@@ -1257,7 +1338,7 @@ btn.addEventListener("click", async function () {
             .modal('show');
         }
       } else if (event.data === '42[6,3]') {
-        if (warningMessage === true) {
+        if (warningMessage) {
           warningMessage = false;
           $('.tiny.full.room.modal')
             .modal({
@@ -1279,7 +1360,7 @@ btn.addEventListener("click", async function () {
           socket.players = data[5]; // players'i soket nesnesine kaydet
           socket.isRoom = true;
           socket.send(`42[46,${playerId}]`);
-          if (params.get('private-mode') !== "true") { socket.send(`42[11,"${playerId}","ABED_MUTER_BOT"]`); }
+          if (params.get('private-mode') !== "true") { socket.send(`42[11,"${playerId}","Bot developer: github.com/anonimbiri"]`); }
           updateUserList(data[5]);
           iziToast.info({
             position: 'topRight',
@@ -1342,7 +1423,7 @@ btn.addEventListener("click", async function () {
 
             if (data[1].nick.startsWith("REDbot") && data[1].avatar === 1) {
               for (const s of socketList) {
-                s.send(`42[11,"${s.playerId}","🤖 I respect this bot and cannot work against it. Goodbye! 👋 ABED_MUTER_BOT "]`);
+                s.send(`42[11,"${s.playerId}","🤖 I respect this bot and cannot work against it. Goodbye! 👋 Bot developer: github.com/anonimbiri."]`);
                 s.send(`42[24,${s.playerId}]`);
               }
             } else {
@@ -1551,9 +1632,10 @@ btn.addEventListener("click", async function () {
 });
 btn2.addEventListener("click", function () {
   if (socketList) {
+    warningMessage = false;
     socketList.forEach(function (socket) {
       if (socket.readyState === WebSocket.OPEN) {
-        if (params.get('private-mode') === "true") { socket.send(`42[11,"${socket.playerId}","ABED_MUTER_BOT"]`); }
+        if (params.get('private-mode') === "true") { socket.send(`42[11,"${socket.playerId}","Bot developer: github.com/anonimbiri"]`); }
         socket.close();
         socket.onerror = null;
         socket.onclose = null;
@@ -1609,7 +1691,7 @@ function updateUserList(players) {
   }
 
   players.forEach(player => {
-    if (!socketList.find((s) => s.playerCode === player.id && isOpen(s))) {
+    if (!socketList.find((s) => s.playerCode === player.id)) {
 
       const itemDiv = document.createElement('div');
       itemDiv.classList.add('item');
@@ -1810,10 +1892,12 @@ $('.private.checkbox')
     onChecked: function () {
       $('.profil.bot-image.dropdown').addClass('disabled');
       $('#botname .input').addClass('disabled');
+      document.querySelector("#LoadUsernameList").style.display = "block";
     },
     onUnchecked: function () {
       $('.profil.bot-image.dropdown').removeClass('disabled');
       $('#botname .input').removeClass('disabled');
+      document.querySelector("#LoadUsernameList").style.display = "none";
     }
   })
   ;
@@ -1936,8 +2020,8 @@ document.querySelector("#send").addEventListener("click", function () {
   const regex = /\b[aAá]\.?([lLℓᎥiI]\.?){2}[hH𝔥ʜ]*[\W_]*[aAá]\.?([lLℓᏂhH𝔥ʜ]*[\W_]*){1,2}\b|\b(?:[^\w\s]*[aAá][^\w\s]*){2,}|\b[ᴬaAá][ˡlL1Ii][ᴸlL1Ii]?[ᴬaAá][ℍhH](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*|\b[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼áaAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[lLℓIi][^w\s]*[lLℓIi](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[aAá][^\w\s]*[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼aáAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*\b|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|İsa|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|(?:\W*[\/\*\-+.,:;]\W*)*Y(?:\W*[\/\*\-+.,:;]\W*)*a(?:\W*[\/\*\-+.,:;]\W*)*h(?:\W*[\/\*\-+.,:;]\W*)*v(?:\W*[\/\*\-+.,:;]\W*)*e|(?:\W*[\/\*\-+.,:;]\W*)*İ(?:\W*[\/\*\-+.,:;]\W*)*\b/gi;
 
   if (regex.test(messagetext)) {
-    document.querySelector('#messagetext input').value = "ABED_MUTER";
-    messagetext = "ABED_MUTER";
+    document.querySelector('#messagetext input').value = "anonimbiri";
+    messagetext = "anonimbiri";
   }
 
   let openSockets = socketList.filter(socket => socket.readyState === WebSocket.OPEN && socket.isRoom);
@@ -1970,14 +2054,14 @@ function startSpamIntervalId() {
         const regex = /\b[aAá]\.?([lLℓᎥiI]\.?){2}[hH𝔥ʜ]*[\W_]*[aAá]\.?([lLℓᏂhH𝔥ʜ]*[\W_]*){1,2}\b|\b(?:[^\w\s]*[aAá][^\w\s]*){2,}|\b[ᴬaAá][ˡlL1Ii][ᴸlL1Ii]?[ᴬaAá][ℍhH](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*|\b[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼áaAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[lLℓIi][^w\s]*[lLℓIi](?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*[aAá][^\w\s]*[hH][ℑℎhHℏ𝕙𝖍𝗁][𝖺aáA𝗮𝘢ⓗ𝐡][𝛂𝛼aáAá𝒶𝓪𝔞𝕒]+(?:\W*[\/\*\-+.,:;]\W*)*[^\W_]*\b|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|Jesus|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|Yahve|İsa|İsa Mesih|Yahweh|İsa|Jesus Christ|Yahv[eéèêë]|İs[aáàâä] Mes[iíìîï]h|Yahw[eéèêë]h|Jes[uúùûü]s Chr[iíìîï]st|(?:\W*[\/\*\-+.,:;]\W*)*Y(?:\W*[\/\*\-+.,:;]\W*)*a(?:\W*[\/\*\-+.,:;]\W*)*h(?:\W*[\/\*\-+.,:;]\W*)*v(?:\W*[\/\*\-+.,:;]\W*)*e|(?:\W*[\/\*\-+.,:;]\W*)*İ(?:\W*[\/\*\-+.,:;]\W*)*\b/gi;
 
         if (regex.test(spamtext)) {
-          document.querySelector('#spamtext input').value = "ABED_MUTER";
-          spamtext = "ABED_MUTER";
+          document.querySelector('#spamtext input').value = "anonimbiri";
+          spamtext = "anonimbiri";
         }
         const randomIndex = Math.floor(Math.random() * (spamtext.length + 1));
         let modifiedMessage;
 
         if (Math.random() < 0.1) {
-          modifiedMessage = "ABED_MUTER";
+          modifiedMessage = "Bot developer: github.com/anonimbiri";
         } else {
           modifiedMessage = spamtext.slice(0, randomIndex) + '឵' + spamtext.slice(randomIndex);
         }
