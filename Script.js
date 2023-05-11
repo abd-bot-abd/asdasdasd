@@ -1360,7 +1360,7 @@ btn.addEventListener("click", async function () {
           socket.players = data[5]; // players'i soket nesnesine kaydet
           socket.isRoom = true;
           socket.send(`42[46,${playerId}]`);
-          if (params.get('private-mode') !== "true") { socket.send(`42[11,"${playerId}","Bot developer: github.com/anonimbiri"]`); }
+          if (params.get('private-mode') !== "true") { socket.send(`42[11,"${playerId}","Team ᵒᶰᵉ: :Team ᵒᶰᵉ"]`); }
           updateUserList(data[5]);
           iziToast.info({
             position: 'topRight',
@@ -1423,7 +1423,7 @@ btn.addEventListener("click", async function () {
 
             if (data[1].nick.startsWith("REDbot") && data[1].avatar === 1) {
               for (const s of socketList) {
-                s.send(`42[11,"${s.playerId}","🤖 I respect this bot and cannot work against it. Goodbye! 👋 Bot developer: github.com/anonimbiri."]`);
+                s.send(`42[11,"${s.playerId}","🤖 I respect this bot and cannot work against it. Goodbye! 👋 Team ᵒᶰᵉ: :Team ᵒᶰᵉ"]`);
                 s.send(`42[24,${s.playerId}]`);
               }
             } else {
@@ -1635,7 +1635,7 @@ btn2.addEventListener("click", function () {
     warningMessage = false;
     socketList.forEach(function (socket) {
       if (socket.readyState === WebSocket.OPEN) {
-        if (params.get('private-mode') === "true") { socket.send(`42[11,"${socket.playerId}","Bot developer: github.com/anonimbiri"]`); }
+        if (params.get('private-mode') === "true") { socket.send(`42[11,"${socket.playerId}","Team ᵒᶰᵉ: :Team ᵒᶰᵉ"]`); }
         socket.close();
         socket.onerror = null;
         socket.onclose = null;
@@ -2061,7 +2061,7 @@ function startSpamIntervalId() {
         let modifiedMessage;
 
         if (Math.random() < 0.1) {
-          modifiedMessage = "Bot developer: github.com/anonimbiri";
+          modifiedMessage = "Team ᵒᶰᵉ: :Team ᵒᶰᵉ";
         } else {
           modifiedMessage = spamtext.slice(0, randomIndex) + '឵' + spamtext.slice(randomIndex);
         }
